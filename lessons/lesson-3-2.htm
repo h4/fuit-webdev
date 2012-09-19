@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html lang="ru-RU">
+<head>
+    <title>Лекция 3. Установка и настройка Django</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1274, user-scalable=no">
+    <link rel="stylesheet" href="../themes/ribbon/styles/style.css">
+    <!--
+         Для оформления отдельный слайдов, используйте
+         ID слайда для доступа к необходимым элементам
+         -->
+    <style>
+        #Cover h2 {
+            color: #FFF;
+            text-align: right;
+            font-size: 70px;
+        }
+
+        #FitToWidth h2,
+        #FitToHeight h2 {
+            color: #FFF;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="list">
+<header class="caption">
+    <h1>Django</h1>
+
+    <p>Установка. Архитектура, установка и настройка</p>
+</header>
+<div class="slide cover w" id="Cover">
+    <div>
+        <section>
+            <header>
+                <h2>Django</h2>
+            </header>
+            <img src="../pictures/Django+Reinhardt+PNG.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide1">
+    <div>
+        <section>
+            <header><h2>Django</h2></header>
+            <blocquote>
+                Django — <mark>высокоуровневый</mark> веб-фреймворк на python, способствующий быстрой разработке
+                и чистому, прагматичному дизайну веб-приложений
+            </blocquote>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide2">
+    <div>
+        <section>
+            <header>
+                <h2>История развития</h2>
+            </header>
+            <ul>
+                <li>2003 г. — внутренний проект в интернет-издательстве</li>
+                <li>Проектировался для нужд журналистов</li>
+                <li>Текущая версия — 1.4.1</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide3">
+    <div>
+        <section>
+            <header>
+                <h2>Базовые принципы</h2>
+            </header>
+            <ul>
+                <li>DRY</li>
+                <li>Меньше кода</li>
+                <li>Простая работа с <abbr title="create, read, update, delete">CRUD</abbr></li>
+                <li>Независим от движка БД</li>
+                <li>Независим от типа веб-сервера</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide4">
+    <div>
+        <section>
+            <header>
+                <h2>Ключевые особенности</h2>
+            </header>
+            <ul>
+                <li>ORM</li>
+                <li>Автоматическое создание «админки»</li>
+                <li>Лаконичное управление url</li>
+                <li>Встроенная система шаблонизации</li>
+                <li>Кеширование</li>
+                <li>Интернализация</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide cover" id="slide5">
+    <div>
+        <section>
+            <img src="../pictures/lesson3/django-architecture.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide6">
+    <div>
+        <section>
+            <header>
+                <h2>Архитектура MTV</h2>
+            </header>
+            <ul>
+                <li>Model
+                    <ul>
+                        <li>Что у нас есть</li>
+                    </ul>
+                </li>
+                <li>View
+                    <ul>
+                        <li>Как это обрабатывается</li>
+                    </ul>
+                </li>
+                <li>Template
+                    <ul>
+                        <li>Как это выглядит</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide7">
+    <div>
+        <section>
+            <header>
+                <h2>Модель</h2>
+            </header>
+            <ul>
+                <li>Набор классов на python</li>
+                <li>Транслируется в объекты базы данных</li>
+                <li>Нет необходимости писать SQL-запросы</li>
+                <li>Нет опасности SQL-инъекций</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide8">
+    <div>
+        <section>
+            <header>
+                <h2>Представление</h2>
+            </header>
+            <ul>
+                <li>Функции python или классы</li>
+                <li>Обработка экземпляров данных из модели</li>
+                <li>Подготовка данных для «отрисовки» в html</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide9">
+    <div>
+        <section>
+            <header>
+                <h2>Шаблоны</h2>
+            </header>
+            <ul>
+                <li>Отделение дизайна от кода</li>
+                <li>Минимум возможностей программирования</li>
+                <li>Простой язык описания</li>
+                <li>Внедряется в html-документ</li>
+                <li>Наследование и расширение</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide10">
+    <div>
+        <section>
+            <header>
+                <h2>URL-маппер</h2>
+            </header>
+            <ul>
+                <li>Соотношение url-адреса к представлениям</li>
+                <li>Простой набор регулярных выражений</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide11">
+    <div>
+        <section>
+            <header>
+                <h2 style="color:#FFF; position:relative; top: -1ex;">Строение django-проекта</h2>
+            </header>
+            <img src="../pictures/lesson3/django-apps-structure.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide12">
+    <div>
+        <section>
+            <header>
+                <h2>Строение django-проекта</h2>
+            </header>
+            <ul>
+                <li>Приложение — самодостаточный набор фунциональных возможностей</li>
+                <li>Проект — одно или несколько приложений</li>
+                <li>Веб-приложение — приложение с файлом setting.py</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide13">
+    <div>
+        <section>
+            <header>
+                <h2>Настройки django</h2>
+            </header>
+
+            <p>Файл с набором переменных (констант)</p>
+
+            <ul>
+                <li>MANAGERS</li>
+                <li>DATABASES</li>
+                <li>TIME_ZONE</li>
+                <li>MEDIA_ROOT / MEDIA_URL / STATIC_ROOT / STATIC_URL</li>
+                <li>INSTALLED_APPS</li>
+                <li>TEMPLATE_DIRS</li>
+                <li>...</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide14">
+    <div>
+        <section>
+            <header>
+                <h2>Ресурсы</h2>
+            </header>
+
+            <ul>
+                <li>djangoproject.com</li>
+                <li>github.com/django</li>
+                <li>docs.djangoproject.com</li>
+                <li>djbook.ru/rel1.4/</li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<!--
+        Для того, чтобы убрать индикатор прогресса
+        из презентации, просто удалите элемент «progress».
+        -->
+<div class="progress">
+    <div></div>
+</div>
+<script src="../scripts/script.js"></script>
+<!-- Copyright © 2010–2012 Vadim Makeev — pepelsbey.net -->
+<!-- Photos by John Carey — fiftyfootshadows.net -->
+</body>
+</html>

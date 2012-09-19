@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html lang="ru-RU">
+<head>
+    <title>Лекция 3. Установка модулей python</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1274, user-scalable=no">
+    <link rel="stylesheet" href="../themes/ribbon/styles/style.css">
+    <!--
+         Для оформления отдельный слайдов, используйте
+         ID слайда для доступа к необходимым элементам
+         -->
+    <style>
+        #Cover h2 {
+            color: #FFF;
+            text-align: right;
+            font-size: 70px;
+        }
+
+        #FitToWidth h2,
+        #FitToHeight h2 {
+            color: #FFF;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="list">
+<header class="caption">
+    <h1>Python</h1>
+
+    <p>Установка модулей, виртуальные окружения</p>
+</header>
+<div class="slide cover w" id="Cover">
+    <div>
+        <section>
+            <header>
+                <h2>Python</h2>
+            </header>
+            <img src="../pictures/python.jpg" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide1">
+    <div>
+        <section>
+            <header><h2>Модули</h2></header>
+
+            <ul>
+                <li>Каталог с *.py</li>
+                <li>Каталог с __init__.py</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide2">
+    <div>
+        <section>
+            <header>
+                <h2>Импортирование модулей</h2>
+            </header>
+
+            <pre>
+                <code>import simplejson</code>
+                <code>from suds import client</code>
+                <code>import PIL as image</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide3">
+    <div>
+        <section>
+            <header>
+                <h2>Поиск пакетов</h2>
+            </header>
+            <ul>
+                <li>./</li>
+                <li>PYTHONPATH</li>
+                <li>std_lib</li>
+                <li><mark>ImportError</mark></li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide4">
+    <div>
+        <section>
+            <header>
+                <h2>Способы установки</h2>
+            </header>
+            <ul>
+                <li>Из исходников</li>
+                <li>apt-get | yum | port install</li>
+                <li>python package managers</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide5">
+    <div>
+        <section>
+            <header>
+                <h2>Проблемы</h2>
+            </header>
+            <ul>
+                <li>Актуальность</li>
+                <li>Зависимости</li>
+                <li>sudo !!</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide6">
+    <div>
+        <section>
+            <header>
+                <h2>pip</h2>
+            </header>
+
+            <pre>
+                <code>pip install</code>
+                <code>pip freeze</code>
+                <code>pip search</code>
+                <code>pip uninstall</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide7">
+    <div>
+        <section>
+            <header>
+                <h2>pip</h2>
+            </header>
+
+            <pre>
+                <code>pip freeze > requirements.txt</code>
+                <code>pip install -r requirements.txt</code>
+                <code>pip install -e &lt;VCS+REPOS_URL[@REV]#EGG=PACKAGE&gt;</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide8">
+    <div>
+        <section>
+            <header>
+                <h2>Деплоймент</h2>
+            </header>
+            <ul>
+                <li>Разные модули</li>
+                <li>Разные <em>версии</em> модулей</li>
+                <li>sudo !!</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide9">
+    <div>
+        <section>
+            <header>
+                <h2>virtualenv</h2>
+            </header>
+
+            <p>Создание изолированного python-окружения</p>
+
+            <pre>
+                <code>sudo pip install virtualenv</code>
+                <code>sudo apt-get install virtualenv</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide10">
+    <div>
+        <section>
+            <header>
+                <h2>virtualenv</h2>
+            </header>
+
+            <pre><code>$ virtualenv --no-site-packages DIR</code>
+            <code>$ virtualenv -p=python2.6 DIR</code></pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide11">
+    <div>
+        <section>
+            <header>
+                <h2>Выбор окружения</h2>
+            </header>
+
+            <pre>
+                <code>source DIR/bin/activate</code>
+                <code>(<mark>env</mark>) some magick</code>
+                <code>deactivate <mark>env</mark></code>
+            </pre>
+        </section>
+    </div>
+</div>
+
+
+<!--
+        Для того, чтобы убрать индикатор прогресса
+        из презентации, просто удалите элемент «progress».
+        -->
+<div class="progress">
+    <div></div>
+</div>
+<script src="../scripts/script.js"></script>
+<!-- Copyright © 2010–2012 Vadim Makeev — pepelsbey.net -->
+<!-- Photos by John Carey — fiftyfootshadows.net -->
+</body>
+</html>
