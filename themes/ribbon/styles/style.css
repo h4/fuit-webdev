@@ -21,7 +21,7 @@ BODY {
 .slide section {
 	padding:80px 120px 0;
 	width:784px;
-	height:560px;
+	height:688px;
 	background:#FFF;
 	color:#000;
 	}
@@ -294,7 +294,7 @@ BODY {
 		position:relative;
 		overflow:hidden;
 		width:512px;
-		height:320px;
+		height:384px;
 		box-shadow:0 0 50px #3C3D40;
 		border-radius:1px;
 		background:rgba(0, 0, 0, 0.3);
@@ -338,7 +338,7 @@ BODY {
 		}
 	.list .slide > div {
 		width:256px;
-		height:160px;
+		height:192px;
 		}
 	.list .slide section {
 		-webkit-transform:scale(0.25);
@@ -356,9 +356,9 @@ BODY {
 	top:50%;
 	left:50%;
 	overflow:hidden;
-	margin:-320px 0 0 -512px;
+	margin:-384px 0 0 -512px;
 	width:1024px;
-	height:640px;
+	height:768px;
 	background:#000;
 	}
 	.full .caption {
