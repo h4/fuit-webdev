@@ -14,13 +14,13 @@
             color: #FFF;
             text-align: right;
             font-size: 70px;
-        }
+            }
 
         #FitToWidth h2,
         #FitToHeight h2 {
             color: #FFF;
             text-align: center;
-        }
+            }
     </style>
 </head>
 <body class="list">
@@ -46,16 +46,13 @@
                 <h2>рCУБД, поддерживаемые Python</h2>
             </header>
             <ul>
-                <li>IBM DB2</li>
-                <li>Firebird (and Interbase)</li>
-                <li>Informix</li>
+                <li>Firebird (and Interbase)</li><li>Informix</li>
                 <li>Ingres</li>
-                <li>MySQL</li>
-                <li>Oracle</li>
-                <li>PostgreSQL</li>
+                <li><strong>MySQL</strong></li>
+                <li><strong>Oracle</strong></li>
+                <li><strong>PostgreSQL</strong></li>
                 <li>SAP DB (also known as "MaxDB")</li>
                 <li>Microsoft SQL Server</li>
-                <li>Sybase</li>
             </ul>
             <p><a href="http://wiki.python.org/moin/DatabaseInterfaces">wiki.python.org/moin/DatabaseInterfaces</a></p>
         </section>
@@ -94,10 +91,10 @@
             <pre>
                 <code># DATABASES в settings.py</code>
                 <code>from django.shortcuts import render_to_response</code>
-                <code>from mysite.books.models import Book</code>
+                <code><mark>from mysite.books.models import Book</mark></code>
                 <code> </code>
                 <code>def book_list(request):</code>
-                <code>    books = Book.objects.order_by('name')</code>
+                <code>    <mark>books = Book.objects.order_by('name')</mark></code>
                 <code>    return render_to_response('book_list.html',</code>
                 <code>        {'books': books})</code>
             </pre>
@@ -114,14 +111,14 @@
                 <li>Меньше кода</li>
                 <li>Нет переключения контекста (SQL|Python)</li>
                 <li>Переносимость между платформами</li>
-                <li>Большая надёжность</li>
+                <li>Б<em>о</em>льшая надёжность</li>
                 <li>Версионирование структуры БД</li>
                 <li>Сигналы, валидация данных, генерация админки etc.</li>
             </ul>
         </section>
     </div>
 </div>
-<div class="slide" id="slide4">
+<div class="slide" id="slide5">
     <div>
         <section>
             <header>
@@ -129,12 +126,13 @@
             </header>
             <ul>
                 <li>Возможность рассинхронизации моделей с БД</li>
+                <li>Автоматизировано только построение структуры БД</li>
                 <li>Возможна неоптимальность запросов</li>
             </ul>
         </section>
     </div>
 </div>
-<div class="slide" id="slide8">
+<div class="slide" id="slide6">
     <div>
         <section>
             <header>
@@ -143,8 +141,8 @@
             <p>sqlite</p>
             <pre>
                 <code>DATABASES = {</code>
-                <code>    <mark>'default'</mark>: {</code>
-                <code>        'ENGINE': 'django.db.backends.sqlite3',</code>
+                <code>    <mark>'default'</mark> : {</code>
+                <code>        'ENGINE': 'django.db.backends.<strong>sqlite3</strong>',</code>
                 <code>        'NAME': os.path.join(PROJECT_ROOT, 'data.db'),</code>
                 <code>    }</code>
                 <code>}</code>
@@ -152,17 +150,16 @@
         </section>
     </div>
 </div>
-<div class="slide" id="slide8">
+<div class="slide" id="slide7">
     <div>
         <section>
             <header>
                 <h2>Подключение к БД. settings.py</h2>
             </header>
-            <p>mySQL</p>
             <pre>
                 <code>DATABASES = {</code>
                 <code>    'default': {</code>
-                <code>        'ENGINE': 'django.db.backends.mysql',</code>
+                <code>        'ENGINE': 'django.db.backends.<strong>mysql</strong>',</code>
                 <code>        'NAME': 'dbname',</code>
                 <code>        'USER': 'root',</code>
                 <code>        'PASSWORD': 'secret',</code>
@@ -174,23 +171,23 @@
         </section>
     </div>
 </div>
-<div class="slide" id="slide5">
+<div class="slide" id="slide8">
     <div>
         <section>
             <header>
                 <h2>Модель</h2>
             </header>
-            <p>Класс на языке python, свойства которого преобразуются в столбцы таблицы.</p>
+            <p><code>Класс</code> на языке python, свойства которого преобразуются в столбцы таблицы.</p>
             <ul>
                 <li>Базовый класс — django.db.models.Model</li>
                 <li>Одна модель — одна таблица</li>
                 <li>Модели можно наследовать</li>
-                <li>Свойства модели переопределить</li>
+                <li>Свойства модели переопределить нельзя</li>
             </ul>
         </section>
     </div>
 </div>
-<div class="slide" id="slide6">
+<div class="slide" id="slide9">
     <div>
         <section>
             <header>
@@ -200,33 +197,35 @@
             <pre>
                 <code>from django.db import models</code>
                 <code> </code>
-                <code>class <mark>P</mark>erson(models.Model):</code>
-                <code>    first_name = models.CharField('Имя', max_length=30)</code>
-                <code>    last_name = models.CharField('Фамилия', max_length=30)</code>
+                <code>class <mark>P</mark>erson(<strong>models.Model</strong>):</code>
+                <code>    first_name = <strong>models.CharField</strong>('Имя',</code>
+                <code>        max_length=30)</code>
+                <code>    last_name = models.CharField('Фамилия',</code>
+                <code>        <strong>max_length</strong>=30)</code>
             </pre>
         </section>
     </div>
 </div>
-<div class="slide" id="slide6">
+<div class="slide" id="slide10">
     <div>
         <section>
             <header>
                 <h2>Таблица, построенная из модели</h2>
             </header>
 
-            <pre><code>$ ./manage.py syncdb</code></pre>
+            <pre><code>$ ./manage.py <strong>syncdb</strong></code></pre>
 
             <pre>
                 <code>CREATE TABLE <mark>myapp_</mark>person (</code>
                 <code>    "<mark>id</mark>" serial NOT NULL PRIMARY KEY,</code>
                 <code>    "first_name" varchar(30) NOT NULL,</code>
-                <code>    "last_name" varchar(30) <mark>NOT NULL</mark></code>
-                <code>    );</code>
+                <code>    "last_name" varchar(30)<mark>NOT NULL</mark></code>
+                <code> );</code>
             </pre>
         </section>
     </div>
 </div>
-<div class="slide" id="slide7">
+<div class="slide" id="slide11">
     <div>
         <section>
             <header>
@@ -237,35 +236,36 @@
                 <code># views.py</code>
                 <code>from myapp.models import Person</code>
                 <code> </code>
-                <code>def get_last_person(request):</code>
+                <code>def get_last_person_name(request):</code>
                 <code>    last_person = Person.<mark>objects</mark>.all()[-1]</code>
+                <code>    return last_person.name</code>
             </pre>
         </section>
     </div>
 </div>
-<div class="slide" id="slide9">
+<div class="slide" id="slide12">
     <div>
         <section>
             <header>
                 <h2>Типы полей моделей</h2>
             </header>
 
-            <li>BooleanField</li>
-            <li>CharField</li>
-            <li>DateField</li>
-            <li>DateTimeField</li>
-            <li>DecimalField</li>
-            <li>EmailField</li>
-            <li>FileField</li>
-            <li>IntegerField</li>
-            <li>SlugField</li>
-            <li>TextField</li>
-            <li>TimeField</li>
-            <li>URLField</li>
+            <ul>
+                <li>BooleanField</li>
+                <li>CharField</li>
+                <li>DateField, DateTimeField, TimeField</li>
+                <li>DecimalField</li>
+                <li>EmailField</li>
+                <li>FileField</li>
+                <li>IntegerField</li>
+                <li>SlugField</li>
+                <li>TextField</li>
+                <li>URLField</li>
+            </ul>
         </section>
     </div>
 </div>
-<div class="slide" id="slide10">
+<div class="slide" id="slide13">
     <div>
         <section>
             <header>
@@ -280,23 +280,21 @@
 
             <pre>
                 <code>class Car(models.Model):</code>
-                <code>    manufacturer = models.ForeignKey(<mark>'</mark>Manufacturer<mark>'</mark>)</code>
+                <code>    manufacturer = models.ForeignKey(<mark>'</mark><strong>Manufacturer</strong><mark>'</mark>)</code>
                 <code>    # ...</code>
                 <code> </code>
-                <code>    class Manufacturer(models.Model):</code>
-                <code>        # ...</code>
+                <code>class <strong>Manufacturer</strong>(models.Model):</code>
+                <code>    # ...</code>
             </pre>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide14">
     <div>
         <section>
             <header>
-                <h2>Свойства полей</h2>
-
+                <h2>Свойства полей (общие для всех типов)</h2>
             </header>
-            <p>Общие для всех типов полей</p>
 
             <ul>
                 <li>null</li>
@@ -306,13 +304,15 @@
                 <li>help_text</li>
                 <li>primary_key</li>
                 <li>unique</li>
-                <li><mark>verbose_name</mark></li>
+                <li>
+                    <mark>verbose_name</mark>
+                </li>
                 <li>validators</li>
             </ul>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide15">
     <div>
         <section>
             <header>
@@ -331,7 +331,7 @@
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide16">
     <div>
         <section>
             <header>
@@ -346,12 +346,12 @@
                 <code>        ordering = ["room_number"]</code>
                 <code>        verbose_name = "Аудитория"</code>
                 <code>        verbose_name_plural = "Аудитории"</code>
-                <code>        db_table = 'auditories'</code>
+                <code>        db_table = "auditories"</code>
             </pre>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide17">
     <div>
         <section>
             <header>
@@ -365,15 +365,15 @@
                 <code>    first_name = models.CharField('Имя', max_length=30)</code>
                 <code>    last_name = models.CharField('Фамилия', max_length=30)</code>
                 <code> </code>
-                <code>    def initials(<mark>self</mark>):</code>
+                <code>    <strong>def</strong> abbr(<mark>self</mark>):</code>
                 <code>        return u'%s %s.' % (</code>
-                <code>              self.last_name, </code>
-                <code>              self.first_name[0])</code>
+                <code>            <strong>self</strong>.last_name, </code>
+                <code>            <strong>self</strong>.first_name[0])</code>
             </pre>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide18">
     <div>
         <section>
             <header>
@@ -387,7 +387,7 @@
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide19">
     <div>
         <section>
             <header>
@@ -396,18 +396,18 @@
             </header>
             <pre>
                 <code>class Person(models.Model):</code>
-                <code>    ...</code>
+                <code> ...</code>
                 <code> </code>
-                <code>    def <mark>__unicode__</mark>(self):</code>
-                <code>        return u'%s %s.' % (</code>
-                <code>              self.first_name, self.last_name)</code>
+                <code> def <mark>__unicode__</mark> (self):</code>
+                <code>     return <strong>u</strong>'%s %s.' % (</code>
+                <code>         self.first_name, self.last_name)</code>
                 <code> </code>
                 <code>[&lt;Person: Олег Ёжиков>]</code>
             </pre>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide20">
     <div>
         <section>
             <header>
@@ -425,12 +425,12 @@
 
             <ul>
                 <li>Можно вызывать методы модели</li>
-                <li>Изменений в БД при создании экземпляра не происходит</li>
+                <li>БД при <em>создании</em> экземпляра не изменяется</li>
             </ul>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide21">
     <div>
         <section>
             <header>
@@ -438,21 +438,21 @@
             </header>
             <p>Наследуются от django.db.models, могут быть переопределены</p>
             <ul>
-                <li>clean()</li>
-                <li>full_clean()</li>
-                <li>save()
+                <li>clean( )</li>
+                <li>full_clean( )</li>
+                <li>save( )
                     <ul>
-                        <li>save(force_insert=True)</li>
-                        <li>save(force_update=True)</li>
+                        <li>save( <em>force_insert</em>=True )</li>
+                        <li>save( <em>force_update</em>=True )</li>
                     </ul>
                 </li>
-                <li>delete()</li>
-                <li>get_absolute_url()</li>
+                <li>delete( )</li>
+                <li>get_absolute_url( )</li>
             </ul>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide22">
     <div>
         <section>
             <header>
@@ -463,19 +463,29 @@
                 <code> </code>
                 <code>peoples = Person.<mark>objects</mark>.filter(</code>
                 <code>    first_name__startswith="О"</code>
-                <code>    ).order_by('last_name')[:5]</code>
+                <code>        )<mark>.</mark>order_by('last_name')<strong>[:5]</strong></code>
             </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide23">
+    <div>
+        <section>
+            <header>
+                <h2>Объекты, оперирующие запросами</h2>
+            </header>
 
             <pre>
                 <code>>>> type(Person.objects)</code>
                 <code>    django.db.models.manager.Manager</code>
+                <code> </code>
                 <code>>>> type(peoples)</code>
                 <code>    django.db.models.query.QuerySet</code>
             </pre>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide24">
     <div>
         <section>
             <header>
@@ -496,27 +506,27 @@
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide25">
     <div>
         <section>
             <header>
                 <h2>Методы, не возвращающие QuerySet</h2>
             </header>
             <ul>
-                <li>get</li>
-                <li>create</li>
-                <li>get_or_create</li>
-                <li>count</li>
-                <li>iterator</li>
-                <li>aggregate</li>
-                <li>exists</li>
-                <li>update</li>
-                <li>delete</li>
+                <li>get           <em>&lt;object></em></li>
+                <li>create        <em>&lt;object></em></li>
+                <li>get_or_create <em>&lt;object></em></li>
+                <li>count         <em>&lt;int></em></li>
+                <li>iterator      <em>&lt;iterator></em></li>
+                <li>aggregate     <em>&lt;dict></em></li>
+                <li>exists        <em>&lt;bool></em></li>
+                <li>update        <em>&lt;int></em></li>
+                <li>delete        <em>&lt;void></em></li>
             </ul>
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide26">
     <div>
         <section>
             <header>
@@ -535,7 +545,7 @@
         </section>
     </div>
 </div>
-<div class="slide" id="slide11">
+<div class="slide" id="slide27">
     <div>
         <section>
             <header>
@@ -553,27 +563,51 @@
                 <li>search</li>
                 <li>regex, iregex</li>
             </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide28">
+    <div>
+        <section>
+            <header>
+                <h2>Cложные запросы</h2>
+            </header>
+
+            <pre>
+                <code>from django.db.models import Q</code>
+                <code> </code>
+                <code>heroes = Person.objects.get(</code>
+                <code>    <strong>Q</strong>(last_name='Старк') <mark>|</mark> <strong>Q</strong>(last_name='Уэйн')</code>
+                <code>)</code>
+                <code> </code>
+                <code>heroes = Person.objects.<mark>raw</mark>('SELECT from ...');</code>
             </pre>
         </section>
     </div>
 </div>
+<div class="slide" id="slide29">
+    <div>
+        <section>
+            <header>
+                <h2>Аргументы manage.py для работы с БД</h2>
+            </header>
+            <ul>
+                <li>dbshell</li>
+                <li><strong>dumpdata</strong> &lt;<em>appname appname appname.Model </em>...></li>
+                <li>inspectdb</li>
+                <li><strong>loaddata</strong> &lt;<em>fixture fixture ...</em>></li>
+                <li>sql &lt;appname appname ...></li>
+                <li>sqlall &lt;appname appname ...></li>
+                <li><strong>syncdb</strong></li>
+                <li>validate</li>
+            </ul>
+        </section>
+    </div>
+</div>
 
-
-
-Аргументы manage.py
-
-
-
-
-<!--
-        Для того, чтобы убрать индикатор прогресса
-        из презентации, просто удалите элемент «progress».
-        -->
 <div class="progress">
     <div></div>
 </div>
 <script src="../scripts/script.js"></script>
-<!-- Copyright © 2010–2012 Vadim Makeev — pepelsbey.net -->
-<!-- Photos by John Carey — fiftyfootshadows.net -->
 </body>
 </html>
