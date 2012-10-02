@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html lang="ru-RU">
+<head>
+    <title>Лекция 5. Обслуживание базы данных</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1274, user-scalable=no">
+    <link rel="stylesheet" href="../themes/ribbon/styles/style.css">
+    <!--
+         Для оформления отдельный слайдов, используйте
+         ID слайда для доступа к необходимым элементам
+         -->
+    <style>
+        #Cover h2 {
+            color: #000;
+            text-align: right;
+            font-size: 70px;
+            text-shadow: 0 0 8px #FFF;
+            }
+
+        #FitToWidth h2,
+        #FitToHeight h2 {
+            color: #FFF;
+            text-align: center;
+            }
+    </style>
+</head>
+<body class="list">
+<header class="caption">
+    <h1>Обслуживание базы данных</h1>
+
+    <p>Синхронизация. Загрузка и выгрузка данных</p>
+</header>
+<div class="slide cover w" id="Cover">
+    <div>
+        <section>
+            <header>
+                <h2>Обслуживание базы данных</h2>
+            </header>
+            <img src="../pictures/6337805088_386ac66517_b.jpg" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide1">
+    <div>
+        <section>
+            <header>
+                <h2>django-admin.py</h2>
+            </header>
+            <p>/usr/bin/django-admin</p>
+            <pre>
+                <code>#!/usr/bin/env python</code>
+                <code>from <mark>django.core</mark> import <mark>management</mark></code>
+                <code> </code>
+                <code>if __name__ == "__main__":</code>
+                <code>    management.execute_from_command_line()</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide2">
+    <div>
+        <section>
+            <header>
+                <h2>manage.py</h2>
+            </header>
+            <p>django-admin startproject pandora</p>
+            <pre>
+                <code>#!/usr/bin/env python</code>
+                <code>import os</code>
+                <code>import sys</code>
+                <code> </code>
+                <code>if __name__ == "__main__":</code>
+                <code>    <mark>os.environ.setdefault</mark>("DJANGO_SETTINGS_MODULE",</code>
+                <code>          <mark>"pandora.settings"</mark>)</code>
+                <code>    from django.core.management import execute_from_command_line</code>
+                <code>    execute_from_command_line(sys.argv)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide3">
+    <div>
+        <section>
+            <header>
+                <h2>django-admin</h2>
+            </header>
+
+            <ul>
+                <li>Требует явного указания <code>--settings</code></li>
+                <li>Имеет подкоманду <code>startproject</code></li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide4">
+    <div>
+        <section>
+            <header>
+                <h2>Подкоманды manage.py</h2>
+            </header>
+
+            <ul>
+                <li>startapp</li>
+                <li>diffsettings</li>
+                <li>compilemessages</li>
+                <li>makemessages</li>
+                <li>shell</li>
+                <li>test</li>
+                <li>runfcgi</li>
+                <li>runserver</li>
+                <li>testserver</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide5">
+    <div>
+        <section>
+            <header>
+                <h2>Подкоманды работы со структурой БД</h2>
+            </header>
+            <ul>
+                <li>flush</li>
+                <li>inspectdb</li>
+                <li>syncdb</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide6">
+    <div>
+        <section>
+            <header>
+                <h2>inspectdb</h2>
+            </header>
+            <p><strong>Заготовка</strong> для models.py</p>
+
+            <ul>
+                <li>Многие поля становятся <code>TextField</code></li>
+                <li>for ☞ <code>for_field</code></li>
+                <li>Распознаются <em>PrimaryKey</em> в PostgreSQL, MySQL и SQLite</li>
+                <li><em>ForeignKey </em>распознаются только в PostgreSQL</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide7">
+    <div>
+        <section>
+            <header>
+                <h2>syncdb</h2>
+            </header>
+
+            <ul>
+                <li>Создание таблиц для приложений (<code>INSTALLED_APPS</code>)</li>
+                <li>Создание таблиц только для новых моделей</li>
+                <li>Возможна загрузка начальных данных</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide8">
+    <div>
+        <section>
+            <header>
+                <h2>Подкоманды работы с данными</h2>
+            </header>
+
+            <ul>
+                <li>cleanup</li>
+                <li>dumpdata &lt;appname appname appname.Model . . . &gt;</li>
+                <li>loaddata &lt;fixture fixture . . . &gt;</li>
+                <li>testserver &lt;fixture fixture . . . &gt;</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide9">
+    <div>
+        <section>
+            <header>
+                <h2>fixtures</h2>
+            </header>
+
+            <p>Набор файлов, представляющих данные в сериализованном виде</p>
+
+            <h3>Форматы</h3>
+            <ul>
+                <li><em>JSON</em></li>
+                <li>XML</li>
+                <li>YAML</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide10">
+    <div>
+        <section>
+            <header>
+                <h2>Дополнительные параметры dumpdata</h2>
+            </header>
+
+            <ul>
+                <li>--all</li>
+                <li>--format</li>
+                <li>--indent &lt;num&gt;</li>
+                <li>--exclude</li>
+                <li>--natural</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide11">
+    <div>
+        <section>
+            <header>
+                <h2>Поиск fixtures</h2>
+            </header>
+
+            <li>&lt;appname&gt;/fixtures/</li>
+            <li><code>FIXTURE_DIRS</code> в settings.py</li>
+            <li>Строковое представление имени</li>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide12">
+    <div>
+        <section>
+            <header>
+                <h2>loaddata</h2>
+            </header>
+
+            <ul>
+                <li>loaddata mydata ==  loaddata mydata<em>.json</em><br>(loaddata mydata.xml, loaddata mydata.yaml)</li>
+                <li>d.json == d.<em>json</em>, d.<em>json.zip</em>, d.<em>json.gz</em>, d.<em>json.bz2</em></li>
+                <li><em>initial_data</em>.json используется <em>syncdb</em></li>
+                <li>Применяются в неизвестном порядке</li>
+                <li>Применяются единой транзакцией</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide13">
+    <div>
+        <section>
+            <header>
+                <h2>Дополнительные команды sql*</h2>
+            </header>
+
+            <ul>
+                <li>sql &lt;appname appname . . . &gt;</li>
+                <li>sqlall &lt;appname appname . . . &gt;</li>
+                <li>sqlclear &lt;appname appname . . . &gt;</li>
+                <li>sqlcustom &lt;appname appname . . . &gt;</li>
+                <li>sqlflush</li>
+                <li>sqlindexes &lt;appname appname . . . &gt;</li>
+                <li>sqlsequencereset &lt;appname appname . . . &gt;</li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<div class="progress">
+    <div></div>
+</div>
+<script src="../scripts/script.js"></script>
+</body>
+</html>
