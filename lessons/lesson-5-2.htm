@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html lang="ru-RU">
+<head>
+    <title>Лекция 5. Приложение Django Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1274, user-scalable=no">
+    <link rel="stylesheet" href="../themes/ribbon/styles/style.css">
+    <!--
+         Для оформления отдельный слайдов, используйте
+         ID слайда для доступа к необходимым элементам
+         -->
+    <style>
+        #Cover h2 {
+            color: #000;
+            text-align: right;
+            font-size: 70px;
+            }
+
+        #FitToWidth h2,
+        #FitToHeight h2 {
+            color: #FFF;
+            text-align: center;
+            }
+    </style>
+</head>
+<body class="list">
+<header class="caption">
+    <h1>Приложение Django Admin</h1>
+</header>
+<div class="slide cover h" id="Cover">
+    <div>
+        <section>
+            <header>
+                <h2>Приложение Admin</h2>
+            </header>
+            <img src="../pictures/magic-pony-django-wallpaper.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide1">
+    <div>
+        <section>
+            <header>
+                <h2>Другой Admin</h2>
+            </header>
+
+            <p>django-admin.py — скрипт в <code>/usr/bin</code></p>
+            <p>Приложение admin — модуль из <code>django.contrib</code></p>
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide2">
+    <div>
+        <section>
+            <img src="../pictures/batteries-included.jpeg" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide3">
+    <div>
+        <section>
+            <header>
+                <h2>Работа с данными в Django</h2>
+            </header>
+
+            <ul>
+                <li>class Book(models.Model)</li>
+                <li>book = Book( field=value )</li>
+                <li>book.save( )</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide cover" id="slide4">
+    <div>
+        <section>
+
+            <img src="../pictures/django-admin.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide5">
+    <div>
+        <section>
+            <header>
+                <h2>Подключение django-admin</h2>
+            </header>
+            <p>settings.py</p>
+
+            <pre>
+                <code>INSTALLED_APPS = (</code>
+                <code>    django.contrib.auth,</code>
+                <code>    django.contrib.contenttypes,</code>
+                <code>    django.contrib.messages,</code>
+                <code>    django.contrib.sessions,</code>
+                <code>    <mark>django.contrib.admin</mark>,</code>
+                <code> </code>
+                <code>    ...</code>
+                <code>)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide6">
+    <div>
+        <section>
+            <header>
+                <h2>Подключение django-admin</h2>
+            </header>
+            <p>settings.py</p>
+
+            <pre>
+                <code>TEMPLATE_CONTEXT_PROCESSORS = (</code>
+                <code>    django.contrib.messages.context_processors.messages,</code>
+                <code>    ...,</code>
+                <code>)</code>
+                <code> </code>
+                <code>MIDDLEWARE_CLASSES = (</code>
+                <code>    MessageMiddleware,</code>
+                <code>    ...</code>
+                <code>)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide7">
+    <div>
+        <section>
+            <header>
+                <h2>Подключение django-admin</h2>
+            </header>
+            <p>urls.py</p>
+
+            <pre>
+                <code>from django.conf.urls import patterns, include, url</code>
+                <code> </code>
+                <code>from django.contrib import admin</code>
+                <code>admin.autodiscover()</code>
+                <code> </code>
+                <code>urlpatterns = patterns('',</code>
+                <code>    url(r'^admin/', include(admin.site.urls)),</code>
+                <code>    ...</code>
+                <code>)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide8">
+    <div>
+        <section>
+            <header>
+                <h2>./manage.py syncdb</h2>
+            </header>
+
+            <ul>
+                <li>Создание таблиц</li>
+                <li>Создание аккаунта суперпользователя</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide9">
+    <div>
+        <section>
+            <header>
+                <h2>Подключение моделей в /admin/</h2>
+            </header>
+
+            <p>/&lt;myapp&gt;/admin.py</p>
+
+            <pre>
+                <code>from django.contrib import admin</code>
+                <code><mark>from myproject.myapp.models import *</mark></code>
+                <code> </code>
+                <code>admin.site.register(Author)</code>
+                <code>admin.site.register(Book)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide10">
+    <div>
+        <section>
+            <header>
+                <h2>Настройка формы администрирования в /admin/</h2>
+            </header>
+
+            <p>/&lt;myapp&gt;/admin.py</p>
+
+            <pre>
+                <code>from django.contrib import admin</code>
+                <code>from myproject.myapp.models import Author</code>
+                <code> </code>
+                <code>class AuthorAdmin(admin.ModelAdmin):</code>
+                <code>    # описание формы администрирования</code>
+                <code> </code>
+                <code>admin.site.register(Author, AuthorAdmin)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+
+<div class="progress">
+    <div></div>
+</div>
+<script src="../scripts/script.js"></script>
+</body>
+</html>
