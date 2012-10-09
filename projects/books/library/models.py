@@ -42,4 +42,4 @@ class PublisherOffices(models.Model):
     email = models.EmailField('Email')
 
     def __unicode__(self):
-        return self.address
+        return self.phone

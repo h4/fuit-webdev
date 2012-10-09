@@ -54,4 +54,4 @@ class PublisherAdmin(admin.ModelAdmin):
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author)
 admin.site.register(Publisher, PublisherAdmin)
-admin.site.register(PublisherOffices)
+#admin.site.register(PublisherOffices)

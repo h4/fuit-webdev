@@ -1,0 +1,531 @@
+<!DOCTYPE HTML>
+<html lang="ru-RU">
+<head>
+    <title>Лекция 6. Настройка админки</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1274, user-scalable=no">
+    <link rel="stylesheet" href="../themes/ribbon/styles/style.css">
+    <!--
+         Для оформления отдельный слайдов, используйте
+         ID слайда для доступа к необходимым элементам
+         -->
+    <style>
+        #Cover h2 {
+            color: #000;
+            text-align: right;
+            font-size: 70px;
+            }
+
+        #FitToWidth h2,
+        #FitToHeight h2 {
+            color: #FFF;
+            text-align: center;
+            }
+
+        .slide img {
+            display: block;
+            margin: auto;
+            }
+    </style>
+</head>
+<body class="list">
+<header class="caption">
+    <h1>Настройка админки</h1>
+</header>
+<div class="slide cover h" id="Cover">
+    <div>
+        <section>
+            <header>
+                <h2>Настройка админки</h2>
+            </header>
+            <img src="../pictures/lesson6/cover.jpg" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide1">
+    <div>
+        <section>
+            <header>
+                <h2>Элементы adminsite</h2>
+            </header>
+
+            <ul>
+                <li>index</li>
+                <li>/ {{ app_name }}</li>
+                <li>/ {{ app_name }} / {{ model_name }}</li>
+                <li>/ {{ app_name }} / {{ model_name }} / add /</li>
+                <li>/ {{ app_name }} / {{ model_name }} / {{ pk }} /</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide2">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/index.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide3">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/index-user.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide4">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/index-auth.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide5">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/index-sites.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide6">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/index-actions.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide7">
+    <div>
+        <section>
+            <header>
+                <h2>Список экземляров</h2>
+            </header>
+
+            <ul>
+                <li>Отсортирован по pk</li>
+                <li>Отображаются 100 экземпляров на странице</li>
+                <li>Ссылка на добавление нового экземпляра</li>
+                <li>Операции над группой экземпляров</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide8">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-no-__unicode__.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide9">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-__unicode__.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide10">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-add-item.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide11">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/actions.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide12">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-customized.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide13">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-filter.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide14">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-search.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide15">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-editable.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide16">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-date-hierarchy.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide17">
+    <div>
+        <section>
+            <header>
+                <h2>Добавление модели администрирования</h2>
+            </header>
+            <p>admin.py</p>
+
+            <pre>
+                <code>class BookAdmin(admin.<mark>ModelAdmin</mark>): </code>
+                <code>    pass</code>
+                <code> </code>
+                <code>admin.site.register(Book, <mark>BookAdmin</mark>)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide18">
+    <div>
+        <section>
+            <header>
+                <h2>Добавление представления списка</h2>
+            </header>
+            <pre>
+                <code>class BookAdmin(admin.ModelAdmin):</code>                                              
+                <code>    list_display = ('id', 'title', 'print_version',</code>
+                <code>        'publisher')</code>
+                <code>    list_display_links = ('title',)</code>                                             
+                <code>    list_editable = ('publisher',)</code>                                              
+                <code>    list_filter = ('authors', 'publisher',</code>
+                <code>        'publication_date')</code>
+                <code>    ordering  = ('title',)</code>                                                      
+                <code>    search_fields = ('title', 'authors', 'authors__email')</code>                      
+                <code>    date_hierarchy = 'publication_date'</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide19">
+    <div>
+        <section>
+            <header>
+                <h2>Ограниечени m2m</h2>
+            </header>
+            <p>В <code>list_display</code> (list_editable, odrdering) <strong>нельзя</strong> разместить поле типа <code>many2many</code></p>
+
+            <p>При необходимости — использовать методы модели (в models.py или admin.py)</p>
+        </section>
+    </div>
+</div>
+
+<div class="slide" id="slide20">
+    <div>
+        <section>
+            <header>
+                <h2>Представление списка</h2>
+            </header>
+            <pre>
+                <code>class BookAdmin(admin.ModelAdmin):</code>                                              
+                <code>    list_display = ('id', 'title', <mark>'print_version'</mark>,</code>
+                <code>        'publisher')</code>
+                <code>...</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide21">
+    <div>
+        <section>
+            <header>
+                <h2>Исходная модель</h2>
+            </header>
+            <pre>
+                <code>class Book(models.Model):</code>                                                       
+                <code>    title = models.CharField('Название', max_length=128)</code>                        
+                <code>    authors = models.ManyToManyField('Author')</code>                                  
+                <code>    publisher = models.ForeignKey('Publisher')</code>                                  
+                <code>    publication_date = models.DateField('Дата выпуска', default=datetime.now())</code> 
+                <code>    <mark>version</mark> = models.<mark>IntegerField</mark>('Издание', </code>
+                <code>        default=1, blank=True)</code>
+                <code> </code>                                                                               
+                <code>    def __unicode__(self):</code>                                                      
+                <code>        return self.title</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide22">
+    <div>
+        <section>
+            <header>
+                <h2>Методы ModelAdmin</h2>
+            </header>
+            <pre>
+                <code>class BookAdmin(admin.ModelAdmin):</code>                                              
+                <code>    list_display = ('id', 'title', <mark>'</mark>print_version<mark>'</mark>,</code>
+                <code>        'publisher')</code>
+                <code>...</code>
+                <code> </code>
+                <code>    def <mark>print_version</mark>(self, <mark>obj</mark>):</code>
+                <code>        return "издание №%d" % obj.version</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide23">
+    <div>
+        <section>
+            <header>
+                <h2>Представление отдельного экземпляра</h2>
+            </header>
+
+            <ul>
+                <li>Все поля в порядке объявления в модели</li>
+                <li>Кнопки добавления/сохранения/удаления</li>
+                <li>История изменения</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide24">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/item.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide25">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/item-required-field.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide26">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/item-actions.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide27">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/item-fk.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide28">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/item-date.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide29">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/item-m2m.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide30">
+    <div>
+        <section>
+            <header>
+                <h2>Возможности настройки</h2>
+            </header>
+
+            <ul>
+                <li>Порядок вывода полей</li>
+                <li>Readonly</li>
+                <li>Группировка полей</li>
+                <li>Изменение «виджета» отображения</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide31">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/item-horizontal_filter.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide32">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/item-fiedset.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide33">
+    <div>
+        <section>
+            <header>
+                <h2>Настройка ModelAdmin</h2>
+            </header>
+            <pre>
+                <code>class BookAdmin(admin.ModelAdmin):</code>
+                <code>    fieldsets = (</code>
+                <code>        (<mark>None</mark>, {'fields': ('title', 'authors')}),</code>
+                <code>        ('Выходные данные', {</code>
+                <code>            '<mark>classes</mark>': ('collapse',),</code>
+                <code>            '<mark>description</mark>': u'Данные об издательстве и издании',</code>
+                <code>            '<mark>fields</mark>': ('publisher', 'publication_date'),</code>
+                <code>            }),</code>
+                <code>    )</code>
+                <code>    filter_horizontal = ('authors',)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide34">
+    <div>
+        <section>
+            <header>
+                <h2>Прочие свойства ModelAdmin</h2>
+            </header>
+
+            <ul>
+                <li>fields = ( )</li>
+                <li>exclude = ( )</li>
+                <li>list_max_show_all = <em>int</em></li>
+                <li>list_per_page = <em>int</em></li>
+                <li>readonly_fields = ( )</li>
+            </ul>
+            
+            <p>Остальные — в <a href="http://www.djbook.ru/rel1.4/ref/contrib/admin/index.html#modeladmin-methods">документации</a></p>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide35">
+    <div>
+        <section>
+            <header>
+                <h2>Обратные связи</h2>
+            </header>
+            <p>model.py</p>
+            <pre>
+                <code>class PublisherOffices(models.Model):</code>
+                <code>    publisher = models.<mark>ForeignKey</mark>('Publisher')</code>
+                <code>    phone = models.CharField('Телефон', max_length=16)</code>
+                <code>    email = models.EmailField('Email')</code>
+                <code> </code>
+                <code>    def __unicode__(self):</code>
+                <code>        return self.address</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide36">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/list-inlines.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide37">
+    <div>
+        <section>
+            <header>
+                <h2>InlineModelAdmin</h2>
+            </header>
+            <pre>
+                <code>class <mark>PublisherOfficesInline</mark>(admin.TabularInline):</code>
+                <code>    model = PublisherOffices</code>
+                <code>    extra = 2</code>
+                <code> </code>
+                <code>class PublisherAdmin(admin.ModelAdmin):</code>
+                <code>    inlines = [<mark>PublisherOfficesInline</mark>,]</code>
+                <code> </code>
+                <code># admin.site.register(PublisherOffices)</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide38">
+    <div>
+        <section>
+            <header>
+                <h2>InlineModelAdmin</h2>
+            </header>
+            <ul>
+                <li>admin.TabularInline</li>
+                <li>admin.StackedInline</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide39">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/actions.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide40">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/actions-custom.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide cover w" id="slide41">
+    <div>
+        <section>
+            <img src="../pictures/lesson6/actions-custom-result.png" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide42">
+    <div>
+        <section>
+            <header>
+                <h2>Добавление Admin Action</h2>
+            </header>
+            <pre>
+                <code>class BookAdmin(admin.ModelAdmin):</code>
+                <code>...</code>
+                <code>    def add_new_version(self, request, <mark>queryset</mark>):</code>
+                <code>        for item in queryset:</code>
+                <code>            item.version += 1</code>
+                <code>            item.id = <mark>None</mark></code>
+                <code>            item.save(<mark>force_insert=True</mark>)</code>
+                <code> </code>
+                <code>    add_new_version.short_description = u"Добавить новое издание"</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide43">
+    <div>
+        <section>
+            <header>
+                <h2>Удаление Admin Action</h2>
+            </header>
+            <pre>
+                <code>class BookAdmin(admin.ModelAdmin):</code>
+                <code>...</code>
+                <code>    def get_actions(self, request):</code>
+                <code>        actions = <mark>super</mark>(BookAdmin, self).get_actions(request)</code>
+                <code>        del <mark>actions['delete_selected']</mark></code>
+                <code>        return actions</code>
+            </pre>
+        </section>
+    </div>
+</div>
+
+
+<div class="progress">
+    <div></div>
+</div>
+<script src="../scripts/script.js"></script>
+</body>
+</html>
