@@ -27,3 +27,16 @@ def item(request, id):
 	}
 
 	return render(request, 'item.html', context)
+
+
+def new_items(request):
+	"""
+	Список последних сущностей
+	"""
+	things = Thing.objects.order_by("-updated")[:3]
+
+	context = {
+		"things": things,
+	}
+
+	return render(request, 'list.html', context)
