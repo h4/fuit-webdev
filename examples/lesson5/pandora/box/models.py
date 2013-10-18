@@ -17,7 +17,7 @@ class Thing(TimeStampedModel):
 	things_type = models.ForeignKey('ThingsType')
 
 	def __unicode__(self):
-		return u'{}, ({})'.format(self.name, self.things_type)
+		return u'{}, ({})'.format(self.title, self.things_type)
 
 	def get_absolute_url(self):
 		return u'things/{}/'.format(self.id)
