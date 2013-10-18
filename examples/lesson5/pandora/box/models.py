@@ -14,7 +14,7 @@ class Thing(TimeStampedModel):
 	Модель сущностей
 	"""
 	title = models.TextField('Название', max_length=32)
-	things_type = models.ForeignKey('ThingsType')
+	things_type = models.ForeignKey('ThingsType', verbose_name=u'Тип')
 
 	class Meta(object):
 		verbose_name=u'Вещь'
