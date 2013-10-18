@@ -3,9 +3,9 @@ from django.db import models
 from core.models import TimeStampedModel
 
 kinds = (
-	(1, 'Твёрдое'),
-	(2, 'Жидкость'),
-	(3, 'Газ'),
+	(u'1', u'Твёрдое'),
+	(u'2', u'Жидкость'),
+	(u'3', u'Газ'),
 	)
 
 

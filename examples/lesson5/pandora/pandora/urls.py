@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', 'box.views.list'),
+    url(r'^things/(?P<id>[0-9]+)/$', 'box.views.item'),
 )
