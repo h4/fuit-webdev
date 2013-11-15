@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Лекция 6. Миграция данных</title>
+    <meta name="viewport" content="width=1274, user-scalable=no">
+    <link rel="stylesheet" href="../themes/ribbon/styles/style.css">
+
+    <style>
+        #Cover h2 {
+            color: #000;
+            text-align: right;
+            font-size: 70px;
+            }
+
+        #FitToWidth h2,
+        #FitToHeight h2 {
+            color: #FFF;
+            text-align: center;
+            }
+
+        .slide img {
+            display: block;
+            margin: auto;
+            }
+    </style>
+</head>
+<body>
+	
+<body class="list">
+<header class="caption">
+    <h1>Миграция данных</h1>
+</header>
+<div class="slide cover h" id="Cover">
+    <div>
+        <section>
+            <header>
+                <h2>Миграция данных</h2>
+            </header>
+            <img src="../pictures/migration.jpg" alt="">
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide0">
+    <div>
+        <section>
+            <header>
+                <h2>Миграция в Django</h2>
+            </header>
+
+            <p>Изменение схемы базы данных проекта от одной версии к другой.<br>А также связанные изменения в хранимых данных</p>
+
+            <p><em style="font-size: .8em;">schema evolution, mutations</em></p>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide1">
+    <div>
+        <section>
+            <header>
+                <h2>syncdb</h2>
+            </header>
+
+            <ul>
+            	<li>Только добавление новых моделей</li>
+            	<li>Можно удалить старую и создать новую</li>
+            	<li>«Ручное» изменение схемы БД</li>
+            	<li>В Django 1.7 всё изменится</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide2">
+    <div>
+        <section>
+            <header>
+                <h2>Миграция</h2>
+            </header>
+
+            <ul>
+            	<li>python-код</li>
+            	<li>Прямая и обратная миграции</li>
+            	<li>Можно хранить в VCS</li>
+            	<li>Разрешение конфликтов одноименных миграций</li>
+            	<li>Можно «откатиться» к произвольному состоянию</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide3">
+    <div>
+        <section>
+            <header>
+                <h2>South</h2>
+            </header>
+
+            <ul>
+            	<li>Разработана в 2008 г.</li>
+            	<li>DjangoCon 2008 → OpenSource</li>
+            	<li>2009 — стандарт de Facto</li>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide4">
+    <div>
+        <section>
+            <header>
+                <h2>Установка South</h2>
+            </header>
+
+            <ol>
+            	<li>pip install <mark>S</mark>outh</li>
+            	<li>Добавить '<mark>s</mark>outh' в INSTALLED_APPS</li>
+            	<li>./manage.py syncdb</li>
+            	<li><em>./manage.py convert_to_south <mark>app_name</mark></em></li>
+            </ol>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide5">
+    <div>
+        <section>
+            <header>
+                <h2>Начальная миграция</h2>
+            </header>
+
+            <p>Изменим модель в приложении</p>
+
+            <pre>
+            	<code>$ ./manage.py schemamigration <mark>app_name</mark> --initial</code>
+            	<code>  Creating migrations directory at...</code>
+            	<code>  Creating __init__.py in '../app_name/migrations'...</code>
+            	<code>   + Added model app_name.NewModel</code>
+            	<code>  Created <mark>0001</mark>_initial.py. You can now apply 
+	this migration with: ./manage.py migrate app_name</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide6">
+    <div>
+        <section>
+            <header>
+                <h2>Применение миграции</h2>
+            </header>
+
+            <pre>
+            	<code>$ ./manage.py migrate <mark>app_name</mark></code>
+ 				<code>  Running migrations for app_name:</code>
+ 				<code>  - Migrating forwards to 0001_initial.</code>
+ 				<code>  > app_name:0001_initial</code>
+ 				<code>  - Loading initial data for app_name.</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide7">
+    <div>
+        <section>
+            <header>
+                <h2>Следующая миграция</h2>
+            </header>
+
+            <pre>
+            	<code>$ ./manage.py schemamigration app_name <mark>--auto</mark></code>
+				<code>   + Added field new_field on app_name.NewModel</code>
+				<code>  Created 0002_auto__add_field_new_field.py</code>
+				<code>...</code>
+				<code>$ ./manage.py migrate app_name</code>
+            </pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide8">
+    <div>
+        <section>
+            <header>
+                <h2>Дефолты</h2>
+            </header>
+
+			<pre>
+				<code>class Book(models.Model):</code>
+				<code>    title = models.CharField(max_length=64)</code>
+			</pre>
+
+			<pre>
+				<code>class Book(models.Model):</code>
+				<code>    title = models.CharField(max_length=64)</code>
+				<code>    published = models.DateField()</code>
+			</pre>
+
+			<p>Предположим, что в БД уже есть несколько книг</p>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide9">
+    <div>
+        <section>
+            <header>
+                <h2>Дефолты</h2>
+            </header>
+
+			<pre>
+				<code>./manage.py schemamigration app_name --auto</code>
+				<code>  ? The field 'Book.published' does not have a <mark>default</mark> 
+	specified, yet is <mark>NOT NULL</mark>.</code>
+				<code>  ? Since you are adding or removing this field, 
+	you MUST specify a default value to use for 
+	existing rows. Would you like to:</code>
+				<code>  ?  <mark>1.</mark> Quit now, and add a default to the field 
+	in models.py</code>
+				<code>  ?  <mark>2.</mark> Specify a one-off value to use 
+	for existing columns now</code>
+				<code>  ? Please select a choice:</code>
+			</pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide10">
+    <div>
+        <section>
+            <header>
+                <h2>Дефолты</h2>
+            </header>
+
+			<pre>
+				<code>  ? Please select a choice: <mark>2</mark></code>
+ 				<code>  ? Please enter Python code for your one-off default value.</code>
+ 				<code>  ? The datetime module is available, so you can 
+	do e.g. datetime.date.today()</code>
+ 				<code><mark>>>></mark> datetime.date.today() </code>
+ 				<code>  + Added field published on app_name.Books</code>
+				<code>  Created 0003_auto__add_field_book_published.py. 
+  You can now apply this migration with: 
+  ./manage.py migrate southtut</code>
+			</pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide11">
+    <div>
+        <section>
+            <header>
+                <h2>Миграции</h2>
+            </header>
+
+			<pre>
+				<code>ls -1 ./app_name/<mark>migrations</mark></code>
+				<code>  0001_initial.py</code>
+				<code>  0002_auto__add_field_lecture_vimeo_id.py</code>
+				<code>  0003_auto__chg_field_lecture_vimeo_id.py</code>
+				<code>  0004_auto__add_event__add_field_participantfuture_event__add_field_schedule.py</code>
+				<code>  0005_auto__chg_field_event_coordinates__chg_field_event_place.py</code>
+				<code>  0006_auto__chg_field_event_domain.py</code>
+				<code>  0007_auto__add_field_menu_event.py</code>
+			</pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide12">
+    <div>
+        <section>
+            <header>
+                <h2>Применение и откат миграций</h2>
+            </header>
+
+			<pre>
+				<code>./manage.py migrate</code>
+				<code>./manage.py migrate app_name</code>
+				<code>./manage.py migrate app_name 0004_auto__add_event__add_field_participantfuture_event__add_field_schedule.py</code>
+				<code>./manage.py migrate app_name 0004</code>
+			</pre>
+
+			<pre>
+				<code>./manage.py migrate <mark>zero</mark></code>
+			</pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide13">
+    <div>
+        <section>
+            <header>
+                <h2>Применение миграций</h2>
+            </header>
+
+			<pre>
+				<code>$ ./manage.py migrate app_name 000</code>
+				<code>  Running migrations for app_name:</code>
+ 				<code>  - Prefix 00 matches more than one migration:</code>
+     			<code>    0001_initial</code>
+     			<code>    0002_add_username</code>
+			</pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide14">
+    <div>
+        <section>
+            <header>
+                <h2>Команды South</h2>
+            </header>
+            
+            <p>Вызываются из ./manage.py</p>	
+
+			<ul>
+				<li>migrate</li>
+				<li>schemamigration</li>
+				<li>datamigration</li>
+				<li>graphmigrations</li>
+				<li>syncdb</li>
+				<li>convert_to_south</li>
+			</ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide15">
+    <div>
+        <section>
+            <header>
+                <h2>Аргументы schemamigration</h2>
+            </header>
+
+			<ul>
+				<li>--initial</li>
+				<li>--auto</li>
+				<li>--update</li>
+				<li>--stdout</li>
+				<li>--add-model</li>
+				<li>--add-field</li>
+				<li>--add-index</li>
+			</ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide16">
+    <div>
+        <section>
+            <header>
+                <h2>Аргументы migrate</h2>
+            </header>
+
+			<ul>
+				<li>--all</li>
+				<li>--list</li>
+				<li>--merge</li>
+				<li>--no-initial-data</li>
+				<li>--fake</li>
+				<li>--db-dry-run</li>
+			</ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide17">
+    <div>
+        <section>
+            <header>
+                <h2>Миграция данных</h2>
+            </header>
+
+			<pre>
+				<code>./manage.py datamigration app_name <mark>capitalise_titles</mark></code>
+			</pre>
+
+			<ul>
+				<li>--freeze</li>
+				<li>--stdout</li>
+			</ul>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide18">
+    <div>
+        <section>
+            <header>
+                <h2>Описаний миграций</h2>
+            </header>
+
+        	<pre>
+        		<code style="color: #999;">// migrations/capitalise_titles.py</code>
+            	<code>class Migration(<mark>DataMigration</mark>):</code>
+    			<code>	def forwards(self, <mark>orm</mark>):</code>
+    			<code>		"Write your forwards methods here."</code>
+    			<code> </code>
+    			<code>	def backwards(self, <mark>orm</mark>):</code>
+        		<code>		"Write your backwards methods here."</code>
+        		<code> </code>
+        		<code>models = {</code>
+        		<code>   u'app_name.books': {</code>
+        		<code>	}</code>
+        		<code>}</code>
+			</pre>
+        </section>
+    </div>
+</div>
+<div class="slide" id="slide19">
+    <div>
+        <section>
+        	<pre>
+            	<code>class Migration(DataMigration):</code>
+    			<code>	def forwards(self, orm):</code>
+    			<code>		for book in <mark>orm</mark>.Books.objects.all():</code>
+    			<code> 			book.title = book.title.capitalize()</code>
+    			<code> 			book.save()</code>
+    			<code> </code>
+    			<code>	def backwards(self, orm):</code>
+        		<code>		<mark>raise</mark> RuntimeError("Cannot reverse 
+    		this migration.")</code>
+			</pre>
+        </section>
+    </div>
+</div>
+
+<div class="progress">
+    <div></div>
+</div>
+<script src="../scripts/script.js"></script>
+</body>
+</html>
