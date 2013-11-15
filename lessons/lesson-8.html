@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Лекция 8. Деплоймент</title>
+  <meta name="viewport" content="width=1274, user-scalable=no">
+  <link rel="stylesheet" href="../themes/ribbon/styles/style.css">
+
+  <style>
+    #Cover h2 {
+      color: #FFF;
+      text-align: right;
+      font-size: 70px;
+      text-shadow: 0 0 10px #000;
+    }
+
+    #FitToWidth h2,
+    #FitToHeight h2 {
+      color: #FFF;
+      text-align: center;
+    }
+
+    .slide img {
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body class="list">
+<header class="caption">
+  <h1>Деплоймент Django-проекта</h1>
+</header>
+
+<section class="slide cover" id="Cover">
+  <div>
+    <header>
+      <h2>Деплоймент Django-проекта</h2>
+    </header>
+    <img src="../pictures/lesson8/cover.jpg" alt="">
+  </div>
+</section>
+
+<section class="slide">
+  <div>
+    <h2>Деплоймент</h2>
+
+    <p>Процесс выкладки проекта на staging или production сервер</p>
+
+    <ul>
+      <li class="next">Доставка кода</li>
+      <li class="next">Миграция БД</li>
+      <li class="next">Генерация статики</li>
+      <li class="next">Перезапуск сервисов</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div>
+    <h2>Способы деплоймента</h2>
+
+    <ul>
+      <li class="next">Ручной (ftp, ssh)</li>
+      <li class="next">VCS push|pull</li>
+      <li class="next">VCS хуки</li>
+      <li class="next">Инструменты (Capistrano, fabric, chef etc.)</li>
+      <li class="next">Continuous integration & deployment</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div>
+    <h2>Веб-сервер</h2>
+
+    <ul>
+      <li class="next">django runserver</li>
+      <li class="next">
+        <del>django fcgi-сервер</del>
+      </li>
+      <li class="next">wsgi + Apache</li>
+      <li class="next">wsgi + Nginx</li>
+      <li class="next">PAAS</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide shout">
+  <div>
+    <h2><a href="http://dl.spbstu.ru/mod/resource/view.php?id=11815">HTTP-протокол</a></h2>
+  </div>
+</section>
+
+<section class="slide shout">
+  <div>
+    <h2><a href="http://dl.spbstu.ru/mod/resource/view.php?id=12249">Apache</a></h2>
+  </div>
+</section>
+
+<section class="slide shout">
+  <div>
+    <h2><a href="https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/modwsgi/">prod.py</a></h2>
+  </div>
+</section>
+
+<section class="slide">
+  <div>
+    <h2>Подготовительные операции</h2>
+
+    <ul>
+      <li class="next">Разделение конфигурация</li>
+      <li class="next">Разделение зависимостей</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div>
+    <h2>Разделение конфигураций</h2>
+
+    <pre>
+<code># development_settings.py</code>
+<code>DEBUG=True</code>
+<code>...</code>
+    </pre>
+    <pre>
+<code># production_settings.py</code>
+<code>DEBUG=False</code>
+<code>...</code>
+    </pre>
+  </div>
+</section>
+
+<section class="slide">
+  <div>
+    <h2>Разделение конфигураций</h2>
+
+    <pre>
+<code>$ rm my_project/settings.py</code>
+<code>$ mkdir my_project/settings</code>
+<code>$ touch my_project/settings/{__init__.py,common.py,dev.py,prod.py}</code>
+    </pre>
+  </div>
+</section>
+
+<section class="slide">
+  <div>
+    <h2>Разделение конфигураций</h2>
+
+    <pre>
+<code># dev.py</code>
+<code>from .common import *</code>
+<code>DEBUG=True</code>
+    </pre>
+    <pre>
+<code># prod.py</code>
+<code>from .common import *</code>
+<code>DEBUG=False</code>
+    </pre>
+  </div>
+</section>
+
+<section class="slide shout">
+  <div>
+    <h2><a href="https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/">prod.py</a></h2>
+  </div>
+</section>
+
+<section class="slide shout">
+  <div>
+    <h2><a href="https://www.heroku.com/">heroku.com</a></h2>
+  </div>
+</section>
+
+<div class="progress">
+  <div></div>
+</div>
+<script src="../scripts/script.js"></script>
+</body>
+</html>
